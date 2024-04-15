@@ -1,0 +1,56 @@
+install hyperledger-Irhoah
+
+Step 1: install docker
+!sudo apt-get install curl
+
+!curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+
+!sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+
+!sudo apt-get update
+
+!apt-cache policy docker-ce
+
+!sudo apt-get install -y docker-ce
+
+
+Step 2: create docker network
+!sudo docker network create aryaman-iroha-network
+
+step 3:add PostgreSQL to our network
+!sudo docker run --name some-postgres -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=mysecretpassword -p 5432:5432 --network=mithilesh-iroha-network -d postgres:9.5
+
+Step 4:create a volume
+sudo docker volume create blockstore
+
+Step 5: Download the Iroha code from github
+!sudo apt-get install git
+!git clone -b develop https://github.com/hyperledger/iroha --depth=1
+
+Step 6: run the Iroha docker container
+sudo docker run -it --name iroha \
+-p 50051:50051 \
+-v $(pwd)/iroha/example:/opt/iroha_data \
+-v blockstore:/tmp/block_store \
+--network=mithilesh-iroha-network \
+--entrypoint=/bin/bash \
+hyperledger/iroha:latest
+
+Step 7: run Iroha
+!irohad --config config.docker --genesis_block genesis.block --keypair_name node0
+
+Step 8:Open a new terminal
+
+Step 9:attach docker container to our terminal
+sudo docker exec -it iroha /bin/bash
+
+Step 10:Launch the iroha-cli tool and login as admin@test.
+iroha-cli -account_name admin@test
+
+1,14,
+mscit,etst,2
+3,16,
+mscit#test,16.35
+4,2,8,1
+
+
