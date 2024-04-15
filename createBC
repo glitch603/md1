@@ -1,0 +1,49 @@
+create a blockchain
+
+Step 1: open new terminal
+Step 2: on terminal type this command
+!sudo add-apt-repository -y ppa:ethereum/ethereum
+Step 3: install the stable version of go-ethereum:
+!sudo apt-get update
+!sudo apt-get install ethereum
+Step 4: create new directory for storing blockchain data
+mkdir myblockchain
+cd myblockchain
+Step 5:Create genesis.json file
+sudo nano genesis.json
+{
+"config": {
+"chainId": 10,
+"homesteadBlock": 0,
+"eip155Block": 0,
+"eip158Block": 0,
+"eip150Block": 0,
+"eip150Hash":
+"0x0000000000000000000000000000000000000000000000000000000000000000"
+},
+"alloc": {},
+"coinbase": "0x0000000000000000000000000000000000000000",
+"difficulty": "0x02000000",
+"extraData": "",
+"gasLimit": "0x2fefd8",
+"nonce": "0x0000000000000042",
+"mixhash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+"parentHash":
+"0x0000000000000000000000000000000000000000000000000000000000000000",
+"timestamp": "0x00"
+}
+save the file -> ctrl +o to write -> {enter} save -> ctrl +x exit
+Step 6: initialize the block
+sudo geth --datadir TestChain init genesis.json
+Step 7: create network
+sudo geth –datadir TestChain –networkid 1234
+Step 8: open new terminal 2:
+cd myblockchain
+Step 9: attach geth to the network
+sudo geth attach TestChain/geth.ipc
+Step 10: on geth terminal
+personal.newAccount("123456") miner.start()
+miner.setEtherbase(eth.accounts[0])
+admin.addPeer(admin.nodeInfo.enode)
+Step 11:heck balance
+eth.getBalance(eth.accounts[0])
