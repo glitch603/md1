@@ -1,0 +1,75 @@
+A. Function
+pragma solidity ^0.5.0;
+contract SolidityTest {
+constructor() public{
+}
+function getResult() public view returns(string memory){
+uint a = 1;
+uint b = 2;
+uint result = a + b;
+return integerToString(result);
+}
+function integerToString(uint _i) internal pure
+returns (string memory) {
+if (_i == 0) {
+return "0";
+}
+uint j = _i;
+uint len;
+while (j != 0) {
+len++;
+j /= 10;
+}
+bytes memory bstr = new bytes(len);
+uint k = len - 1;
+while (_i != 0) {
+bstr[k--] = byte(uint8(48 + _i % 10));
+_i /= 10;
+}
+return string(bstr);
+}
+}
+
+B. View Function:
+pragma solidity ^0.5.0;
+contract Test {
+function getResult() public view returns(uint product, uint sum){
+uint a = 1; 
+uint b = 2;
+product = a * b;
+sum = a + b;
+}
+}
+
+C. Pure Function:
+pragma solidity ^0.5.0;
+contract Test {
+function getResult() public pure returns(uint product, uint sum){
+uint a = 1;
+uint b = 2;
+product = a * b;
+sum = a + b;
+}
+}
+
+D. Fallback Function:
+pragma solidity ^0.5.0;
+contract Test {
+uint public x ;
+function() external { x = 1; }
+}
+contract Sink {
+function() external payable { }
+}
+contract Caller {
+function callTest(Test test) public returns (bool) {
+(bool success,) = address(test).call(abi.encodeWithSignature("nonExistingFunction()"));
+require(success);
+address payable testPayable = address(uint160(address(test)));
+return (testPayable.send(2 ether));
+}
+function callSink(Sink sink) public returns (bool) {
+address payable sinkPayable = address(sink);
+return (sinkPayable.send(2 ether));
+}
+}
