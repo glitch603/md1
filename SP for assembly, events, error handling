@@ -1,0 +1,48 @@
+A. Assembly
+pragma solidity ^0.5.0;
+library Sum {
+function sumUsingInlineAssembly(uint[] memory _data) public pure returns (uint o_sum) {for
+(uint i = 0; i < _data.length; ++i) {
+assembly {
+o_sum := add(o_sum, mload(add(add(_data, 0x20), mul(i, 0x20))))
+}}
+}
+}
+contract Test {
+uint[] data;
+constructor() public {
+data.push(1);
+data.push(2);
+data.push(3);
+data.push(4);
+data.push(5);
+}
+function sum() external view returns(uint){return
+Sum.sumUsingInlineAssembly(data);
+}
+}
+
+B. Events: 
+pragma solidity ^0.4.21;
+eventExample {
+uint256 public value = 0;
+event Increment(address owner);
+function getValue(uint _a, uint _b) public {
+emit Increment(msg.sender);
+value = _a + _b;
+}
+}
+
+C. Error handling
+pragma solidity ^0.5.0;
+requireStatement {
+function checkInput(uint8 _input) public view returns(string memory){
+require(_input >= 0, "invalid uint");
+require(_input <= 255, "invalid uint8");
+return "Input is Uint8";
+}
+function Odd(uint _input) public view returns(bool){
+require(_input % 2 != 0);
+return true;
+}
+}
