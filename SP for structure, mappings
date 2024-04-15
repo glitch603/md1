@@ -1,0 +1,39 @@
+A. structure
+pragma solidity ^0.5.0;
+contract test {
+struct Book {
+string title;
+string author;
+uint book_id;
+}
+Book book;
+function setBook() public {
+book = Book('Learn Java', 'TP', 1);
+}
+function getBookId() public view returns (uint) {
+return book.book_id;
+}
+}
+
+B. Mappings:
+pragma solidity ^0.5.0;
+contract LedgerBalance {
+mapping(address => uint)  balance;
+function updateBalance() public  returns(uint) {
+balance[msg.sender]=30;
+return balance[msg.sender];
+}
+}
+
+Mapping program for String.
+pragma solidity ^0.5.0;
+contract LedgerBalance {
+mapping(address => string)  name;
+function updateBalance() public returns(string memory){
+name[msg.sender] = "Mrunali";
+return name[msg.sender];
+}
+function printsender() public view returns(address) {
+return msg.sender;
+}
+}
