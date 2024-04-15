@@ -1,0 +1,55 @@
+A. Abstract Contracts
+pragma solidity ^0.5.0;
+contract Calculator {
+function getResult() public view returns(uint);
+}
+contract Test is Calculator {
+function getResult() public view returns(uint) {
+uint a = 4;
+uint b = 2;
+uint result = a + b;
+return result;
+}
+}
+
+B. Interfaces:
+pragma solidity ^0.5.0;
+interface Calculator {
+function getResult() external view returns(uint);
+}
+contract Test is Calculator {
+constructor() public {}
+function getResult() external view returns(uint){
+uint a = 5;
+uint b = 2;
+uint result = a + b;
+return result;
+}
+}
+
+C. Libraries
+pragma solidity ^0.5.0;
+library Search {
+function indexOf(uint[] storage self, uint value) public view returns (uint) {for
+(uint i = 0; i < self.length; i++)
+if (self[i] == value) return i;
+return uint(-1);}
+}
+contract Test {
+uint[] data; uint
+value; uint
+index;
+constructor() public {
+data.push(6);
+data.push(7);
+data.push(8);
+data.push(9);
+data.push(10);
+}
+function isValuePresent() external {
+value = 9;
+index = Search.indexOf(data, value);
+}
+function getresult() public view returns(uint){
+return index;
+}}
