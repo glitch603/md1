@@ -1,0 +1,82 @@
+1. if statement:
+pragma solidity ^0.5.0;
+contract SolidityTest {
+uint storedData;
+constructor() public {
+storedData = 10;
+}
+function getResult() public view returns(string memory){
+uint a = 1;
+uint b = 2;
+uint result = a + b;
+return integerToString(result);
+}
+function integerToString(uint _i) internal pure
+returns (string memory) {
+if (_i == 0) {   
+return "0";
+}
+uint j = _i;
+uint len;
+while (j != 0) {
+len++;
+j /= 10;
+}
+bytes memory bstr = new bytes(len);
+uint k = len - 1;
+while (_i != 0) {
+bstr[k--] = byte(uint8(48 + _i % 10));
+_i /= 10;
+}
+return string(bstr);
+}}
+
+2.if-else statement:
+pragma solidity ^0.5.0;
+contract Types {
+uint i = 10;
+bool even;
+function decision_making(
+) public payable returns(bool){
+if (i%2 == 0){
+even = true;
+}
+else{
+even = false;
+}
+return even;
+}
+}
+
+3.if-else..if statement:
+pragma solidity ^0.5.0;
+contract Types {
+uint i = 12;
+string result;
+function decision_making (
+) public returns(string memory){
+if(i<10){
+result = "less than 10";
+}
+else if(i == 10){
+result = "equal to 10";
+}
+else{
+result = "greater than 10";
+}
+return result;
+}
+}
+
+4. String:
+pragma solidity ^0.4.23;
+contract Test {
+string  str;
+constructor(string str_in){
+str = str_in;
+}
+function str_out() 
+public view returns(string memory){
+return str;
+}
+}
