@@ -1,0 +1,29 @@
+1. state variable:
+pragma solidity ^0.5.0;
+contract Solidity_var_Test {
+uint8 public state_var;
+constructor() public {
+state_var = 16;
+}
+}
+
+2. Local vairable
+pragma solidity ^0.5.0;
+contract Solidity_var_Test {
+function getResult() public view returns(uint){
+uint local_var1 = 1;
+uint local_var2 = 2;
+uint result = local_var1 + local_var2;
+return result;
+}
+}
+
+3. Global variable
+pragma solidity ^0.5.0;
+contract Test {
+address public admin;
+constructor() public {
+admin = msg.sender;
+}
+}
+
